@@ -113,7 +113,6 @@ public class LoginController {
 		return "customer-edit-details-form"; // Return the view name "customer_edit_details_form" to render the page
 	}
 
-
 	// ===========================================================================
 
 }

@@ -1,0 +1,13 @@
+@charset "ISO-8859-1";
+
+
+
+.chart-container {
+	padding-top: 150px;
+	padding-left: 80px;
+	width: 450px;
+	height: 400px;
+	margin-bottom: 20px;
+	float: left;
+	margin-right: 20px;
+}

@@ -6,17 +6,59 @@
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <link rel="stylesheet" type="text/css" href="./css/statement-page.css">
 <script type="text/javascript" src="./js/statement-page.js"></script>
+<style>
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    flex-direction: column;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.container > div {
+    margin-top: 10px;
+}
+
+.container label {
+    margin-right: 10px;
+}
+
+.container input[type="number"],
+.container select {
+    margin-right: 10px;
+}
+
+#div2 {
+    margin-top: 30px;
+}
+</style>
 </head>
 <body>
-	<div id="div1">
+	<div class="container">
 		<h1>Transaction List</h1>
-		<label for="accno">Enter Accno:</label> <input type="number"
-			id="accno"> <br> <label for="selectOption">Select
-			Option:</label> <select id="selectOption">
-			<option value="accounts">Accounts</option>
-			<option value="loans">Loans</option>
-		</select> <br>
-		<button onclick="fetchTransactions()">Get Transactions</button>
+		<div>
+			<label for="accno">Enter Accno:</label>
+			<input type="number" id="accno" name="accno">
+		</div>
+		<div>
+			<label for="selectOption">Select Option:</label>
+			<select id="selectOption">
+				<option value="accounts">Accounts</option>
+				<option value="loans">Loans</option>
+			</select>
+		</div>
+		<div>
+			<button id="fetchTransactions">Get Transactions</button>
+			 <button id="downloadPDF">Download PDF</button>
+		</div>
 	</div>
 	<div id="div2"></div>
 </body>

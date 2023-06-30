@@ -1,5 +1,26 @@
-// JavaScript to handle page load on Neeraj dropdown click
+
 $(document).ready(function() {
+	console.log("Main page  Called ");
+	var mainContent = $('#main-content');
+
+	function graphs() {
+	console.log("graphs function called");
+		$.ajax({
+			url: 'graphs',
+			type: 'GET',
+			success: function(response) {
+				mainContent.html(response);
+			},
+			error: function() {
+				alert('Failed to load page.');
+			}
+		});
+	}
+	
+
+	graphs(); // Call the function on page load
+
+
 	var adduser = $('#adduser');
 	var mainContent = $('#main-content');
 
@@ -36,6 +57,75 @@ $(document).ready(function() {
 			}
 		});
 	});
+
+
+	//---------------------------To View AuditLogs---------------------------------
+	var viewAudits = $('#viewAudits');
+	var mainContent = $('#main-content');
+
+	viewAudits.on('click', function(event) {
+		// Prevent the default behavior of the anchor tag
+		// Load Neeraj page content using AJAX
+		$.ajax({
+			url: 'auditLogs',
+			type: 'GET',
+
+			success: function(response) {
+
+				// Open a new window and display the HTML content
+				var newWindow = window.open("", "_blank");
+				newWindow.document.open();
+				newWindow.document.write(response);
+				newWindow.document.close();
+				//mainContent.html(response);
+			},
+			error: function() {
+				alert('Failed to load page.');
+			}
+		});
+	});
+	//-------------------------------To download AuditLogs ----------------------------------
+
+	var downloadAudits = $('#downloadAudits');
+
+	downloadAudits.on('click', function(event) {
+		event.preventDefault();
+
+		// Make the AJAX call to fetch the PDF content
+		$.ajax({
+			url: 'auditDownloads',
+			type: 'GET',
+			xhrFields: {
+				responseType: 'blob'
+			},
+			success: function(response) {
+				// Create a blob URL from the response
+				var blobUrl = URL.createObjectURL(response);
+
+				// Create a temporary link element to initiate the download
+				var link = document.createElement('a');
+				link.href = blobUrl;
+				link.download = 'audit_logs.pdf';
+				link.style.display = 'none';
+				document.body.appendChild(link);
+
+				// Simulate a click event on the link to trigger the download
+				link.click();
+
+				// Cleanup by revoking the blob URL and removing the link element
+				URL.revokeObjectURL(blobUrl);
+				document.body.removeChild(link);
+			},
+			error: function() {
+				alert('Failed to load PDF.');
+			}
+		});
+	});
+
+
+
+
+
 	//--------------------------    list users button ajax call       --------------------------
 	var listusers = $('#listusers');
 	var mainContent = $('#main-content');
@@ -613,33 +703,7 @@ $(document).ready(function() {
 		});
 	});
 
-	//================================auditlogs==========================
 
-
-	var auditlogs = $('#auditlogs');
-	var mainContent = $('#main-content');
-
-	auditlogs.on('click', function(event) {
-		// Prevent the default behavior of the anchor tag
-		// Load Neeraj page content using AJAX
-		$.ajax({
-			url: 'auditLogs',
-			type: 'GET',
-
-			success: function(response) {
-
-				// Open a new window and display the HTML content
-				var newWindow = window.open("", "_blank");
-				newWindow.document.open();
-				newWindow.document.write(response);
-				newWindow.document.close();
-				//mainContent.html(response);
-			},
-			error: function() {
-				alert('Failed to load page.');
-			}
-		});
-	});
 	//======================================================================
 
 	var statement_generation = $('#statement_generation');

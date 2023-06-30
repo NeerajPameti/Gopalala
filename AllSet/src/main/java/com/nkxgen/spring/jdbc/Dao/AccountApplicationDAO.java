@@ -29,7 +29,6 @@ public class AccountApplicationDAO implements AccountApplicationDaoInterface {
 	}
 
 	public List<AccountApplication> getAccountsappByType(String value) {
-		System.out.println("neeraj function loki vacahav repository lo : " + value);
 
 		// Create a JPQL query to select AccountApplication objects based on the given type value
 		String jpql = "SELECT la FROM AccountApplication la WHERE la.acap_acty_id = :value";
